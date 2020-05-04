@@ -1,3 +1,11 @@
+# How to get it running
+
+- run `composer install`
+- Create a database
+- Copy the .env.example and rename it to .env, change the value's to your settings
+- run `php artisan migrate`
+- run `php -S localhost:8000 -t public`
+
 # Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
