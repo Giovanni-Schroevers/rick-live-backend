@@ -16,7 +16,7 @@ class Live extends Model
      * @var array
      */
     protected $fillable = [
-        'option', 'time'
+        'option', 'time', 'addition',
     ];
 
     /**
