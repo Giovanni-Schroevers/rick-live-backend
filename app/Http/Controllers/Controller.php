@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     //Validate code with code in backend
     private function codeIsValid($code) {
-        if(Code::where('code', $code)) {
+        if(Code::where('code', $code)->first()) {
             return true;
         }
         return false;
@@ -22,13 +22,13 @@ class Controller extends BaseController
         if ($this->codeIsValid($request->input('code'))) {
             return response('', 204);
         }
-        return response('Code was incorrect', 400);
+        return response()->json(['message' => 'Code was incorrect'], 400);
     }
 
     //Set stream time with request body
     public function setStreamTime(Request $request) {
         if (!$this->codeIsValid($request->header('code'))) {
-            return response('Code is not valid', 401);
+            return response()->json(['message' => 'Code is not valid'], 401);
         }
         try {
             $live = Live::all()->first()->update($request->all());
