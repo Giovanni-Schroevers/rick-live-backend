@@ -24,7 +24,7 @@ class Live extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = ['created_at', 'updated_at'];
 
     /**
      * The table associated with the model.

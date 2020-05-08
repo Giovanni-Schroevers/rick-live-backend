@@ -15,6 +15,6 @@
 
 $router->group(['prefix' => 'api/'], function() use ($router) {
     $router->get('', 'Controller@getStreamInfo');
-    $router->post('code/', 'Controller@validateCode');
-    $router->post('live/', 'Controller@setStreamTime');
+    $router->put('code/', 'Controller@validateCode');
+    $router->put('live/', 'Controller@setStreamTime');
 });
