@@ -6,6 +6,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Code as Code;
 use App\Live as Live;
+use App\Http\Controllers\Twitter as Twitter;
 
 class Controller extends BaseController
 {
@@ -31,7 +32,16 @@ class Controller extends BaseController
             return response()->json(['message' => 'Code is not valid'], 401);
         }
         try {
-            $live = Live::all()->first()->update($request->all());
+            $live = Live::all()->first();
+            $live->update($request->all());
+            $live = $live->get()[0];
+
+            $message = ucfirst("$live->option!");
+            if ($live->time) $message .= " Om " . substr($live->time, 0, -3) . ".";
+            if ($live->addition) $message .= " $live->addition";
+            if ($live->option == 'ja') $message .= " https://www.twitch.tv/serpentgameplay";
+
+            Twitter::tweet($message);
             return response($live, 200);
         } catch (\Exception $e) {
             return response($e, 500);
