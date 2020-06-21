@@ -44,7 +44,7 @@ class Controller extends BaseController
             Twitter::tweet($message);
             return response($live, 200);
         } catch (\Exception $e) {
-            return response($e, 500);
+            return response()->json(['message' => 'Oeps er gaat iets fout'], 500);
         }
     }
 
@@ -53,7 +53,7 @@ class Controller extends BaseController
         try {
             return response(Live::all()->first(), 200);
         } catch (\Exception $e) {
-            return response($e, 500);
+            return response()->json(['message' => 'Oeps er gaat iets fout'], 500);
         }
     }
 }
